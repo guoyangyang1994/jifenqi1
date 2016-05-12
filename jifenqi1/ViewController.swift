@@ -58,6 +58,16 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
+    @IBAction func jia1(sender: AnyObject) {
+        lable1.text=String(Int(lable1.text!)!+1)
+    }
+    @IBAction func jia2(sender: AnyObject) {
+        
+        //print(Int(lable2.text!))
+        lable2.text=String((Int(lable2.text!)!+1))
+    }
 
+    @IBOutlet weak var lable1: UILabel!
+    @IBOutlet weak var lable2: UILabel!
 }
 
