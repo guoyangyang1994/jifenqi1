@@ -11,10 +11,16 @@ import UIKit
 class ViewController: UIViewController {
 
     var db:SQLiteDB!
+    var timer:NSTimer!
+    var _time:Int = 2700
+    
+    var isStart:Int = 0
     
     @IBOutlet var txtUname: UITextField!
     @IBOutlet var txtMobile: UITextField!
     
+    @IBOutlet weak var time: UILabel!
+    @IBOutlet weak var btStart: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,6 +60,28 @@ class ViewController: UIViewController {
         print(result)
     }
     
+    @IBAction func start(sender: AnyObject) {
+        if isStart == 0{
+            timer=NSTimer.scheduledTimerWithTimeInterval(1,target: self,selector:Selector("tickDown"),userInfo: nil,repeats: true)
+            isStart = 1
+            btStart.setTitle("暂停", forState:UIControlState.Normal)
+            
+        }
+        else{
+            timer.invalidate()
+            btStart.setTitle("开始", forState:UIControlState.Normal)
+            isStart = 0
+        }
+    }
+    
+    func tickDown()
+    {
+        _time -= 1
+        let sec = _time%60
+        let min = _time/60
+        time.text = String(min)+":"+String(sec)
+    
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
